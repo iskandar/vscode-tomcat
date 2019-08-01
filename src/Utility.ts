@@ -21,7 +21,7 @@ export namespace Utility {
         await new Promise((resolve: () => void, reject: (e: Error) => void): void => {
             outputPane.show();
             let stderr: string = '';
-	    options.env = {...options.env, ...projectEnv};
+            options.env = {...options.env, ...projectEnv};
             const p: child_process.ChildProcess = child_process.spawn(command, args, options);
             p.stdout.on('data', (data: string | Buffer): void =>
                 outputPane.append(serverName ? `[${serverName}]: ${data.toString()}` : data.toString()));
@@ -43,8 +43,8 @@ export namespace Utility {
 
     export function setEnv(workdir: string): void {
         projectEnv = {};
-	let fpath = workdir+'/.env';
-	if (!fse.pathExistsSync(fpath)) return;
+        let fpath = workdir+'/.env';
+        if (!fse.pathExistsSync(fpath)) return;
         const envConfig = dotenv.parse(fse.readFileSync(fpath))
         for (let k in envConfig) {
             projectEnv[k] = envConfig[k]
